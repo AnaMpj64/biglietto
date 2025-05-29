@@ -1,0 +1,323 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to top, #773c05, #f8e17d); /* degradado desde abajo */
+    display: flex;
+    align-items: flex-end; /* parte inferior */
+    justify-content: center; /* centrado horizontal */
+    overflow: hidden;
+  }
+
+  /* Estilo para el video de fondo */
+#video-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; /* hace que siempre cubra toda el área */
+  z-index: -1; /* lo pone detrás del contenido */
+  pointer-events: none; /* evita que interfiera con clics */
+}
+
+/* Asegura que el contenido esté por encima del video */
+.contenido {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: white;
+  padding-top: 100px;
+}
+  
+  .contenedor {
+    margin-bottom: 40px; /* espacio desde el borde inferior */
+  }
+  
+  .regalo {
+    width: 800px;
+    animation: subirBajar 2s infinite;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .regalo:hover {
+    cursor: pointer; /* cambia a una mano indicando que se puede interactuar */
+    transform: scale(1.05);
+  }
+
+  .peluche {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    width: 300px;
+    
+    transform: translateY(50px); /* inicia más abajo */
+    transition: transform 1s ease-out, opacity 1s ease-out;
+    z-index: 10;
+  }
+
+  .tickets {
+    position: absolute;
+    top: 100px;
+    left: 40%;
+    transform: translate(-50%, 50px); /* centra horizontalmente y baja un poco */
+    width: 400px;
+  
+    transition: transform 1s ease-out, opacity 1s ease-out;
+    z-index: 10;
+  }
+
+  .oreo {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    width: 400px;
+  
+    transform: translateY(50px);
+    transition: transform 1s ease-out, opacity 1s ease-out;
+    z-index: 10;
+  }
+  
+  .oculto {
+    display: none !important;
+  }
+  
+  .salir {
+    display: block;
+    animation: salirDelRegalo 1s ease-out forwards;
+  }
+
+  .item-container {
+    position: absolute;
+    z-index: 10;
+    transition: transform 0.3s ease;
+  }
+  
+  .item-container:hover {
+    cursor: pointer;
+    transform: scale(1.20);
+  }
+  
+  .item {
+    width: 100%; /* Para que se escale dentro del contenedor */
+    display: block;
+  }
+  
+  /* Posiciones individuales */
+#peluche-container {
+  top: 100px;
+  left: 100px;
+  width: 300px;
+}
+
+#tickets-container {
+  top: 100px;
+  left: 40%;
+  width: 400px;
+}
+
+#oreo-container {
+  top: 100px;
+  right: 100px;
+  width: 400px;
+}
+
+  
+  @keyframes subirBajar {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  @keyframes salirDelRegalo {
+    0% {
+      opacity: 0;
+      transform: translateY(80px) scale(0.8) rotate(-10deg);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-20px) scale(1.05) rotate(5deg);
+    }
+    70% {
+      transform: translateY(10px) scale(1) rotate(-2deg);
+    }
+    100% {
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* más transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
+  
+  .modal-content {
+    background-color: rgba(0, 0, 0, 0.616);
+    padding: 30px 40px;
+    border-radius: 12px;
+    text-align: center;
+    width: 80vw; /* ocupará el 80% del ancho de la pantalla */
+    max-width: none; /* evita que se limite por el anterior max-width */
+    max-height: 80vh; /* para evitar que se pase de la altura de la pantalla */
+    overflow-y: auto; /* scroll si se llena */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    animation: aparecerModal 0.4s ease;
+  }
+  
+  .modal-content p {
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); /* sombra negra intensa */
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .modal-content button {
+    background-color: #080838;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  
+  .modal-content button:hover {
+    background-color: #2727c0;
+  }
+  
+  @keyframes aparecerModal {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+
+  #galletas-container {
+    position: relative;
+    z-index: -1;
+  }
+  
+  .galleta {
+    position: absolute;
+    right: 320px; /* Ajusta según la posición de tu paquete Oreo */
+    top: -160px; /* Altura inicial cercana al paquete */
+    width: 100px;
+    z-index: -1;
+    opacity: 0;
+    animation: salirRodando 2s forwards linear;
+  }
+  
+  @keyframes salirRodando {
+    0% {
+      transform: translateX(0px) translateY(0px) rotate(0deg) scale(0.5);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    30% {
+      transform: translateX(-50px) translateY(20px) rotate(180deg) scale(1);
+    }
+    60% {
+      transform: translateX(-130px) translateY(100px) rotate(540deg) scale(1);
+      opacity: 1; /* aún visible */
+    }
+    90% {
+      transform: translateX(-280px) translateY(260px) rotate(1080deg) scale(1);
+      opacity: 1; /* todavía visible */
+    }
+    100% {
+      transform: translateX(-300px) translateY(300px) rotate(1200deg) scale(1);
+      opacity: 0; /* se desvanece al final */
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .contenedor {
+      margin-bottom: 20px;
+    }
+  
+    .regalo {
+      width: 90vw;
+    }
+  
+    .item-container {
+      position: static;
+      width: 80vw;
+      margin: 20px auto;
+      transform: none !important;
+    }
+  
+    .item-container:hover {
+      transform: scale(1.05); /* efecto menor para móviles */
+    }
+  
+    #peluche-container,
+    #tickets-container,
+    #oreo-container {
+      top: auto;
+      left: auto;
+      right: auto;
+      width: 80vw;
+    }
+  
+    .item {
+      width: 100%;
+    }
+  
+    .modal-content {
+      width: 90vw;
+      padding: 20px;
+    }
+  
+    #ticket-img {
+      max-height: 40vh;
+    }
+  
+    .galleta {
+      right: 0;
+      top: 0;
+      width: 70px;
+    }
+  
+    @keyframes salirRodando {
+      0% {
+        transform: translateX(0px) translateY(0px) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      30% {
+        transform: translateX(-30px) translateY(10px) rotate(180deg) scale(1);
+      }
+      60% {
+        transform: translateX(-80px) translateY(60px) rotate(540deg) scale(1);
+      }
+      90% {
+        transform: translateX(-140px) translateY(120px) rotate(1080deg) scale(1);
+      }
+      100% {
+        transform: translateX(-150px) translateY(150px) rotate(1200deg) scale(1);
+        opacity: 0;
+      }
+    }
+  }
+  

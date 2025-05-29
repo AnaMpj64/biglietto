@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regalo Interactivo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+     <!-- Video de fondo -->
+  <video autoplay muted loop playsinline id="video-fondo">
+    <source src="img/video.mp4" type="video/mp4">
+    Tu navegador no soporta el video.
+  </video>
+
+  <div class="contenedor">
+    <img src="img/gift.png" alt="Regalo" id="gift" class="regalo">
+  </div>
+
+<!-- Peluche -->
+<div class="item-container oculto" id="peluche-container">
+    <img src="img/peluche.png" alt="Peluche" id="peluche" class="item">
+  </div>
+  
+  <!-- Tickets -->
+  <div class="item-container oculto" id="tickets-container">
+    <img src="img/tickets.png" alt="Tickets" id="tickets" class="item">
+  </div>
+  
+  <!-- Oreo -->
+  <div class="item-container oculto" id="oreo-container">
+    <img src="img/paqueteoreo.png" alt="Paquete Oreo" id="oreo" class="item">
+    <div id="galletas-container"></div>
+  </div>
+
+   <!-- Modal -->
+<div id="modal" class="modal oculto">
+    <div class="modal-content">
+      <p id="modal-text">Texto de ejemplo</p>
+      <button id="cerrar-modal">Chiudi</button>
+    </div>
+  </div>
+
+  <!-- Modal para tickets -->
+<div id="modal-tickets" class="modal oculto">
+    <div class="modal-content">
+      <p id="modal-tickets-text">Egregio Signor Simone Ferranti, per poter accedere alla funzione, sarà tenuto a esibire il Suo biglietto. Le consigliamo pertanto di scaricarlo preventivamente per maggiore sicurezza.</p>
+      <img src="img/ticket.jpg" alt="Ticket" id="ticket-img" style="width: 100%; height: auto; max-height: 60vh;">
+      <a id="descargar-ticket" href="img/ticket.jpg" download="biglietto-per-bimbo.png">
+        <button>Scarica</button>
+      </a>
+      <button id="cerrar-modal-tickets" style="margin-top: 10px;">Chiudi</button>
+    </div>
+  </div>
+
+  <script>
+  const gift = document.getElementById('gift');
+
+const peluche = document.getElementById('peluche');
+const tickets = document.getElementById('tickets');
+const oreo = document.getElementById('oreo');
+
+const pelucheContainer = document.getElementById('peluche-container');
+const ticketsContainer = document.getElementById('tickets-container');
+const oreoContainer = document.getElementById('oreo-container');
+
+const modal = document.getElementById('modal');
+const modalText = document.getElementById('modal-text');
+const cerrarModal = document.getElementById('cerrar-modal');
+
+const frases = [
+  "Credo in te, e quando non avrai più forza, Stitch ed io saremo qui per darti l’abbraccio più significativo e pieno d’amore che sia mai esistito in tutta la dannata internet!",
+  "Spioniro Golubiro - Jebeni golub kojeg šalje vlada u javnost da špionira ljude. Mislite da vas još nije našao? Bolje vam je da se već odmah idete sakriti ispod svoje male, slatke, mekane dekice 👀",
+  "Te amo, gracias por llegar a mi vida, mi cielo 💖",
+  "Nemmeno la distanza è così grande come ciò che provo per te, niente potrebbe impedire che tu riceva lo stesso tipo di affetto come se vivessi qui. Ti meritavi i tuoi Oreo di Stitch 💖",
+  "Lu me cori grida pi tia, e lu me amuri è vastuni cchiù di li stiddi e di tuttu l’universu. 🌟",
+  "Did you like the gift? 🎁",
+  "Show me your dick"
+];
+
+gift.addEventListener('click', () => {
+  gift.src = 'img/giftopen.png';
+
+  pelucheContainer.classList.remove('oculto');
+  peluche.classList.add('salir');
+
+  ticketsContainer.classList.remove('oculto');
+  tickets.classList.add('salir');
+
+  oreoContainer.classList.remove('oculto');
+  oreo.classList.add('salir');
+});
+
+peluche.addEventListener('click', () => {
+  const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+  modalText.textContent = fraseAleatoria;
+  modal.classList.remove('oculto');
+});
+
+const modalTickets = document.getElementById('modal-tickets');
+const cerrarModalTickets = document.getElementById('cerrar-modal-tickets');
+
+tickets.addEventListener('click', () => {
+  modalTickets.classList.remove('oculto');
+});
+
+cerrarModalTickets.addEventListener('click', () => {
+  modalTickets.classList.add('oculto');
+});
+
+cerrarModal.addEventListener('click', () => {
+  modal.classList.add('oculto');
+});
+
+
+const oreog = document.getElementById('oreo');
+const galletasContainer = document.getElementById('galletas-container');
+
+oreog.addEventListener('click', () => {
+  const galleta = document.createElement('img');
+  galleta.src = 'img/oreo.png';
+  galleta.classList.add('galleta');
+
+  // Añadir una clase única para cada galleta si quieres identificarla después (opcional)
+  const galletaId = 'galleta-' + Date.now();
+  galleta.id = galletaId;
+
+  galletasContainer.appendChild(galleta);
+
+  // Elimina la galleta después de que termina la animación (2s)
+  setTimeout(() => {
+    galleta.remove();
+  }, 2000);
+});
+  </script>
+</body>
+</html>
